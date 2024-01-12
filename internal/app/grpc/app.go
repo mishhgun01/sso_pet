@@ -51,11 +51,11 @@ func (a *App) MustRun() {
 	}
 }
 
-func (a *App) Stop() {
+func (a *App) Stop(signal string) {
 	const op = "grpcapp.Stop"
 
 	a.log.With(slog.String("op", op)).
-		Info("stopping gRPC server", slog.Int("port", a.port))
+		Info("stopping gRPC server", slog.Int("port", a.port), slog.String("signal", signal))
 
 	a.gRPCServer.GracefulStop()
 }
